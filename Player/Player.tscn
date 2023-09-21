@@ -70,6 +70,8 @@ atlas = ExtResource("4_dxctp")
 region = Rect2(1288, 0, 184, 137)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4nq8i"]
+resource_local_to_scene = true
+resource_name = "fight"
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -101,7 +103,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qyklj")
 }],
-"loop": true,
+"loop": false,
 "name": &"fight",
 "speed": 8.0
 }, {
@@ -139,14 +141,17 @@ animations = [{
 size = Vector2(20, 76)
 
 [node name="Player" type="CharacterBody2D"]
+position = Vector2(597, 378)
 script = ExtResource("1_7870j")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4nq8i")
-animation = &"run"
-frame = 7
-frame_progress = 0.18574
+animation = &"fight"
+frame = 3
+frame_progress = 1.0
+
+[node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 19)
