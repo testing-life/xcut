@@ -6,6 +6,8 @@ signal hit
 @export var jump_speed = -1000
 @export var gravity = 2000
 
+@onready var ap = $AnimationPlayer
+@onready var sprite = $Anim
 var is_attacking = false
 var screen_size
 # Called when the node enters the scene tree for the first time.
@@ -14,19 +16,25 @@ func _ready():
 
 func _physics_process(delta):
 	velocity.y += gravity * delta
-	velocity.x = Input.get_axis("m_left","m_right") * walk_speed
-	print(velocity.x)
-	if velocity.x != 0:
-		$AnimatedSprite2D.play("run")
-		$AnimatedSprite2D.flip_h = velocity.x < 0
-		
-	if Input.is_action_pressed('m_jump') and is_on_floor(): 
-		velocity.y = jump_speed
-		
-	if Input.is_action_just_pressed("f_cut"):
-		$AnimatedSprite2D.play("fight")
-
-	if Input.is_action_pressed('m_crouch') and is_on_floor(): 
-		$AnimatedSprite2D.play("crouch")
+	var horizontal_dir = Input.get_axis("m_left","m_right") 
+	velocity.x = horizontal_dir * walk_speed
+	if horizontal_dir != 0:
+		sprite.flip_h = horizontal_dir == -1
 	
+	if Input.is_action_pressed('m_jump') and is_on_floor():
+		velocity.y = jump_speed 
+		
 	move_and_slide()
+	update_animation(horizontal_dir)
+
+func update_animation(horizontal_direction):
+	if is_on_floor():
+		if horizontal_direction == 0:
+			ap.play("idle")
+		else:
+			ap.play("walk_right")
+	else:
+		if velocity.y < 0:
+			ap.play("jump")
+		else:
+			ap.play("fall")

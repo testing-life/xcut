@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcwnnlxwwemyc"
-path="res://.godot/imported/Crouch.png-0b6447249d32574d85813115f010a765.ctex"
+uid="uid://die7u5rb7timx"
+path="res://.godot/imported/Death.png-0e1564a6819031337a6739c41b10cc05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PlayerSprites/Crouch.png"
-dest_files=["res://.godot/imported/Crouch.png-0b6447249d32574d85813115f010a765.ctex"]
+source_file="res://PlayerSprites/Death.png"
+dest_files=["res://.godot/imported/Death.png-0e1564a6819031337a6739c41b10cc05.ctex"]
 
 [params]
 
