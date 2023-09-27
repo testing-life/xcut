@@ -16,7 +16,6 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	velocity.x = Input.get_axis("m_left","m_right") * walk_speed
 	print(velocity.x)
-	move_and_slide()
 	if velocity.x != 0:
 		$AnimatedSprite2D.play("run")
 		$AnimatedSprite2D.flip_h = velocity.x < 0
@@ -26,3 +25,8 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("f_cut"):
 		$AnimatedSprite2D.play("fight")
+
+	if Input.is_action_pressed('m_crouch') and is_on_floor(): 
+		$AnimatedSprite2D.play("crouch")
+	
+	move_and_slide()

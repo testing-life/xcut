@@ -148,9 +148,7 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4nq8i")
-animation = &"fight"
-frame = 3
-frame_progress = 1.0
+animation = &"crouch"
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
 
