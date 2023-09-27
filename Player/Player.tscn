@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://daulxy3eq668d"]
+[gd_scene load_steps=17 format=3 uid="uid://daulxy3eq668d"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_7870j"]
 [ext_resource type="Texture2D" uid="uid://cdcr7b1urn5e6" path="res://PlayerSprites/Idle.png" id="2_7foxn"]
 [ext_resource type="Texture2D" uid="uid://bsfrxjqnnn10n" path="res://PlayerSprites/Run.png" id="3_h2dl4"]
+[ext_resource type="Texture2D" uid="uid://cob27u3exvdp4" path="res://PlayerSprites/Attack3.png" id="3_ynyi8"]
 [ext_resource type="Texture2D" uid="uid://bjy518siow1wk" path="res://PlayerSprites/Fall.png" id="4_vj68m"]
 [ext_resource type="Texture2D" uid="uid://du3l3cm8vt5vq" path="res://PlayerSprites/Jump.png" id="5_8nuon"]
+[ext_resource type="Texture2D" uid="uid://wbbgssh5ype5" path="res://PlayerSprites/Attack1.png" id="6_dug3q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfig1"]
 size = Vector2(20, 37.8)
@@ -274,9 +276,115 @@ tracks/3/keys = {
 "values": [1, 1]
 }
 
+[sub_resource type="Animation" id="Animation_wuvv1"]
+resource_name = "attack1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anim:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_dug3q")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anim:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Anim:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Anim:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_6ma3x"]
+resource_name = "attack2"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anim:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ynyi8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anim:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Anim:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Anim:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bba7h"]
 _data = {
 "RESET": SubResource("Animation_yx0x1"),
+"attack1": SubResource("Animation_wuvv1"),
+"attack2": SubResource("Animation_6ma3x"),
 "fall": SubResource("Animation_6aklm"),
 "idle": SubResource("Animation_lernc"),
 "jump": SubResource("Animation_2h8cd"),
@@ -306,3 +414,5 @@ texture_filter = 1
 texture = ExtResource("2_7foxn")
 hframes = 10
 frame = 1
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
