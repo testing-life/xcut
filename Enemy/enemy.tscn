@@ -1,7 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlwrp5airf6e6"]
+[gd_scene load_steps=9 format=3 uid="uid://dlwrp5airf6e6"]
 
 [ext_resource type="Texture2D" uid="uid://cxbuaur01ky5d" path="res://EnemySprites/Run2.png" id="1_3e5wv"]
+[ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_w4pcj"]
 [ext_resource type="Texture2D" uid="uid://byloy3osxwhf1" path="res://EnemySprites/Attack3.png" id="2_3jyb8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ol80o"]
+size = Vector2(26, 66)
 
 [sub_resource type="Animation" id="Animation_4p3fq"]
 resource_name = "enemy_run"
@@ -169,9 +173,12 @@ _data = {
 
 [node name="Enemy" type="CharacterBody2D"]
 position = Vector2(429, 289)
+script = ExtResource("1_w4pcj")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 20)
+shape = SubResource("RectangleShape2D_ol80o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3e5wv")
