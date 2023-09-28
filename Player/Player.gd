@@ -26,7 +26,7 @@ func _physics_process(delta):
 		velocity.y = jump_speed 
 	
 	if Input.is_action_just_pressed('f_cut'):
-		is_attacking = true
+		attack()
 		
 	move_and_slide()
 	update_animation(horizontal_dir)
@@ -51,3 +51,10 @@ func _on_animation_player_animation_finished(anim_name):
 	print(anim_name)
 	if anim_name == 'attack1':
 		is_attacking = false # Replace with function body.
+
+func attack():
+	var ovelapping_objects = $AttackArea.get_overlapping_areas()
+	for area in ovelapping_objects:
+		var parent = area.get_parent()
+		parent.queue_free()
+	is_attacking = true

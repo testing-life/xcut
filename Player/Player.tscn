@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://daulxy3eq668d"]
+[gd_scene load_steps=18 format=3 uid="uid://daulxy3eq668d"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_7870j"]
 [ext_resource type="Texture2D" uid="uid://cdcr7b1urn5e6" path="res://PlayerSprites/Idle.png" id="2_7foxn"]
@@ -61,6 +61,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackArea/CollisionShape2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_wuvv1"]
 resource_name = "attack1"
@@ -112,6 +124,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [1, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackArea/CollisionShape2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
 }
 
 [sub_resource type="Animation" id="Animation_6ma3x"]
@@ -391,14 +415,18 @@ _data = {
 "walk_right": SubResource("Animation_cyq4j")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hrofj"]
+radius = 6.8118
+height = 37.7114
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(597, 378)
 scale = Vector2(2.5, 2.5)
 script = ExtResource("1_7870j")
 jump_speed = -600
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -0.100006)
 shape = SubResource("RectangleShape2D_tfig1")
 
@@ -413,5 +441,16 @@ texture_filter = 1
 texture = ExtResource("2_7foxn")
 hframes = 10
 frame = 1
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+visible = false
+position = Vector2(38, -4.80002)
+rotation = 1.28651
+shape = SubResource("CapsuleShape2D_hrofj")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
