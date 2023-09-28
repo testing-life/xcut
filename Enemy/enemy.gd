@@ -36,3 +36,7 @@ func updateAnimation(horizontal_direction):
 		ap.stop()
 	else:
 		ap.play("enemy_run")
+
+
+func _on_hurtbox_area_entered(hitbox):
+	print('enemy hurtbox entered by ' + hitbox.get_parent().name)

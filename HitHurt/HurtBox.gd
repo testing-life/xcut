@@ -7,7 +7,8 @@ func _init():
 	collision_mask = 2
 
 func _ready():
-	connect('area_entered', self, '_on_area_entered')
+	#connect('area_entered', self, '_on_area_entered')
+	pass
 
 func _on_area_entered(hitbox: HitBox):
 	pass

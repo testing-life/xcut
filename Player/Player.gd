@@ -8,6 +8,7 @@ signal hit
 
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Anim
+
 var is_attacking = false
 var screen_size
 var attacks = ['attack1','attack2']
@@ -53,8 +54,4 @@ func _on_animation_player_animation_finished(anim_name):
 		is_attacking = false # Replace with function body.
 
 func attack():
-	var ovelapping_objects = $AttackArea.get_overlapping_areas()
-	for area in ovelapping_objects:
-		var parent = area.get_parent()
-		parent.queue_free()
 	is_attacking = true
