@@ -1,0 +1,31 @@
+1. Characters
+
+   - Animations
+     - walk
+     - jump
+     - crouch
+     - die
+     - wound
+     - idle
+     - attack
+
+2. Enemies
+   - type 1 melee
+     - swedish
+     - rapier
+   - type 2 projectile
+     - rus
+     - berdishe with carbine
+3. Player
+   - chosen infantry
+   - batorowka
+4. Level
+   - background
+   - platforms
+   - entry points
+5. Mechanics
+   - spawning
+   - behaviour
+   - victory
+   - loss
+   - combat
