@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvhq8lmy7c07i"]
+
+[ext_resource type="TileSet" uid="uid://cusye25vmorw7" path="res://Levels/default_tile_set.tres" id="1_3dcqe"]
+
+[node name="TileMap" type="TileMap"]
+tile_set = ExtResource("1_3dcqe")
+format = 2
+layer_0/name = "ground"
+layer_1/name = "column"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "grass"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 2
+layer_2/tile_data = PackedInt32Array()
