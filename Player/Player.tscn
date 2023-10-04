@@ -429,7 +429,8 @@ _data = {
 "walk_right": SubResource("Animation_cyq4j")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lj5ex"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dujc"]
+height = 41.9828
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(597, 378)
@@ -469,9 +470,9 @@ collision_mask = 4
 monitoring = false
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(44.8, -8)
+position = Vector2(39.2, -5.20001)
 rotation = 1.03023
-shape = SubResource("CircleShape2D_lj5ex")
+shape = SubResource("CapsuleShape2D_7dujc")
 debug_color = Color(0.898039, 0, 0.772549, 0.419608)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

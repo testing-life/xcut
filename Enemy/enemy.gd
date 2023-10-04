@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var SPEED = 300.0
 @export var JUMP_VELOCITY = -400.0
-
+@export var health = 100
 @onready var sprite = $Sprite2D
 @onready var ap = $AnimationPlayer
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -40,3 +40,7 @@ func updateAnimation(horizontal_direction):
 
 func _on_hurtbox_area_entered(hitbox):
 	print('enemy hurtbox entered by ' + hitbox.get_parent().name)
+	health -= hitbox.damage
+	if health <= 0:
+		print('is dead')
+		queue_free()
