@@ -191,6 +191,10 @@ libraries = {
 "": SubResource("AnimationLibrary_511uv")
 }
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(22, 11)
+target_position = Vector2(0, 42)
+
 [node name="enemyShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 17)
 shape = SubResource("RectangleShape2D_rnp0a")
