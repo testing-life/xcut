@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://daulxy3eq668d"]
+[gd_scene load_steps=21 format=3 uid="uid://daulxy3eq668d"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_7870j"]
 [ext_resource type="Texture2D" uid="uid://cdcr7b1urn5e6" path="res://PlayerSprites/Idle.png" id="2_7foxn"]
@@ -429,6 +429,9 @@ _data = {
 "walk_right": SubResource("Animation_cyq4j")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yatow"]
+size = Vector2(20, 33.6)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dujc"]
 height = 41.9828
 
@@ -462,7 +465,8 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(45.2, -9.20001)
+position = Vector2(0.399994, -1.20001)
+shape = SubResource("RectangleShape2D_yatow")
 
 [node name="Hitbox" parent="." instance=ExtResource("9_6xhpg")]
 collision_layer = 2
@@ -476,6 +480,7 @@ shape = SubResource("CapsuleShape2D_7dujc")
 debug_color = Color(0.898039, 0, 0.772549, 0.419608)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

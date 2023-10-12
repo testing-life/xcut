@@ -55,3 +55,8 @@ func _on_animation_player_animation_finished(anim_name):
 
 func attack():
 	is_attacking = true
+
+
+
+func _on_hitbox_area_entered(hurtbox):
+	print('player hurtbox entered by ' + hurtbox.get_parent().name)
