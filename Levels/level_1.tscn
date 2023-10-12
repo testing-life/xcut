@@ -35,7 +35,6 @@ layer_2/tile_data = PackedInt32Array(1048607, 458754, 4, 1114143, 458754, 5, 104
 [node name="Enemy" parent="." instance=ExtResource("3_aqpy0")]
 position = Vector2(866, 259)
 scale = Vector2(1.46, 1.46)
-health = 30
 
 [node name="Player" parent="." instance=ExtResource("1_xpy7a")]
 z_index = 1

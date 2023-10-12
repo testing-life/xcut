@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 @export var speed = 50.0
-@export var health = 100
+@export var health = 30
 @onready var sprite = $Sprite2D
 @onready var ap = $AnimationPlayer
 @onready var floorCast = $FloorCast
@@ -22,7 +22,6 @@ func _physics_process(delta):
 	velocity.x = speed
 
 	if player:
-		print(global_transform.origin.x - player.global_transform.origin.x )
 		if player.position.x < position.x && facing_right:
 			flip()
 		position += (player.position - position)/abs(speed) 

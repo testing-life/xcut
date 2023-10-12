@@ -5,13 +5,15 @@ signal hit
 @export var walk_speed = 400
 @export var jump_speed = -1000
 @export var gravity = 2000
-
+@export var health = 50;
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Anim
 
 var is_attacking = false
 var screen_size
 var attacks = ['attack1','attack2']
+var is_dead = false;
+var is_damaged = false;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect()
@@ -33,30 +35,44 @@ func _physics_process(delta):
 	update_animation(horizontal_dir)
 
 func update_animation(horizontal_direction):
-	if is_attacking == false:
-		if is_on_floor():
-			if horizontal_direction == 0:
-				ap.play("idle")
+	if health != 0:
+		if is_attacking == false:
+			if is_on_floor():
+				if horizontal_direction == 0:
+					ap.play("idle")
+				else:
+					ap.play("walk_right")
 			else:
-				ap.play("walk_right")
+				if velocity.y < 0:
+					ap.play("jump")
+				else:
+					ap.play("fall")
 		else:
-			if velocity.y < 0:
-				ap.play("jump")
-			else:
-				ap.play("fall")
+			ap.play('attack1')
 	else:
-		ap.play('attack1')
+		ap.play("death")
+
 
 
 func _on_animation_player_animation_finished(anim_name):
-	print(anim_name)
 	if anim_name == 'attack1':
 		is_attacking = false # Replace with function body.
-
+	if anim_name == 'wound':
+		is_damaged = false;
+	if anim_name == 'death':
+		is_dead = true
+		get_tree().reload_current_scene();
+		
 func attack():
 	is_attacking = true
 
-
-
 func _on_hitbox_area_entered(hurtbox):
 	print('player hurtbox entered by ' + hurtbox.get_parent().name)
+
+
+func _on_hurtbox_area_entered(hitbox):
+	print('player hitbox entered by ' + hitbox.get_parent().name)
+	if health > 0:
+		health -= hitbox.damage;
+		is_damaged = true
+		

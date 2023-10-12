@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://daulxy3eq668d"]
+[gd_scene load_steps=25 format=3 uid="uid://daulxy3eq668d"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_7870j"]
 [ext_resource type="Texture2D" uid="uid://cdcr7b1urn5e6" path="res://PlayerSprites/Idle.png" id="2_7foxn"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://du3l3cm8vt5vq" path="res://PlayerSprites/Jump.png" id="5_8nuon"]
 [ext_resource type="Texture2D" uid="uid://wbbgssh5ype5" path="res://PlayerSprites/Attack1.png" id="6_dug3q"]
 [ext_resource type="PackedScene" uid="uid://bm170sdch3gap" path="res://HitHurt/hurtbox.tscn" id="8_36u3s"]
+[ext_resource type="Texture2D" uid="uid://die7u5rb7timx" path="res://PlayerSprites/Death.png" id="8_wyimc"]
 [ext_resource type="PackedScene" uid="uid://cnrk0juw7yyv" path="res://HitHurt/hitbox.tscn" id="9_6xhpg"]
+[ext_resource type="Texture2D" uid="uid://d1gu8fv0r8g17" path="res://PlayerSprites/Get Hit.png" id="9_bny73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfig1"]
 size = Vector2(20, 37.8)
@@ -418,15 +420,120 @@ tracks/4/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_e7rua"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anim:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_wyimc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anim:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Anim:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Anim:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_04qkq"]
+resource_name = "wound"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anim:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_bny73")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anim:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Anim:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Anim:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bba7h"]
 _data = {
 "RESET": SubResource("Animation_yx0x1"),
 "attack1": SubResource("Animation_wuvv1"),
 "attack2": SubResource("Animation_6ma3x"),
+"death": SubResource("Animation_e7rua"),
 "fall": SubResource("Animation_6aklm"),
 "idle": SubResource("Animation_lernc"),
 "jump": SubResource("Animation_2h8cd"),
-"walk_right": SubResource("Animation_cyq4j")
+"walk_right": SubResource("Animation_cyq4j"),
+"wound": SubResource("Animation_04qkq")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yatow"]
@@ -461,7 +568,6 @@ frame = 1
 [node name="Hurtbox" parent="." instance=ExtResource("8_36u3s")]
 collision_layer = 2
 collision_mask = 4
-monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
@@ -480,6 +586,7 @@ shape = SubResource("CapsuleShape2D_7dujc")
 debug_color = Color(0.898039, 0, 0.772549, 0.419608)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 
 [editable path="Hurtbox"]
